@@ -4,6 +4,9 @@ use Illuminate\Database\Seeder;
 
 class UsersSeeder extends Seeder
 {
+    /** @var int $count Number of users which will be generated */
+    protected $count = 20;
+
     /**
      * Run the database seeds.
      *
@@ -40,5 +43,13 @@ class UsersSeeder extends Seeder
                 [[$env_user->email, $env_user->login, $env_user->password]]
             );
         }
+
+        for ($i = 0; $i < $this->count; $i++) {
+            factory(\User::class)->create();
+        }
+
+        $this->command->line('');
+        $this->command->info($this->count . ' test users were created.');
+
     }
 }
