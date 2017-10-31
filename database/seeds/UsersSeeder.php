@@ -47,22 +47,25 @@ class UsersSeeder extends Seeder
         for ($i = 0; $i < $this->count; $i++) {
             factory(\User::class)->create();
         }
-
-        $this->command->line('');
+        
         $this->command->info($this->count . ' test users were created.');
 
         // Users common accounts
         \User::all()
             ->each(function (\User $user) {
-                $user->save(factory(\Account::class)->create(), ['is_owner', 1]);
+                $user
+                    ->accounts()
+                    ->save(factory(\Account::class)->create(), ['is_owner' => 1]);
             });
 
         // User pockets
         \User::inRandomOrder()
-            ->take(floor(\User::count(), 2))
+            ->take(floor(\User::count() / 2))
             ->get()
             ->each(function (\User $user) {
-                $user->save(factory(\Pocket::class)->create(), ['is_owner' => 1]);
+                $user
+                    ->pockets()
+                    ->save(factory(\Pocket::class)->create(), ['is_owner' => 1]);
             });
 
     }

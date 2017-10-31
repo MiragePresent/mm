@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Pocket
  *
- *
+ * @property int $id
  *
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
  */

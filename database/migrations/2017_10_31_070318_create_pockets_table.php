@@ -55,6 +55,7 @@ class CreatePocketsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('pocket_user');
         Schema::dropIfExists('pockets');
     }
 }

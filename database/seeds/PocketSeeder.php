@@ -20,13 +20,36 @@ class PocketSeeder extends Seeder
             $pockets = factory(\Pocket::class, floor(\User::count() / rand(2,3)))
                 ->create()
                 ->each(function (\Pocket $pocket) {
-                    $pocket->save(\User::inRandomOrder()->first(), ['is_owner', 1]);
+
+                    /** @var \User $user */
+                    $user = \User::whereDoesntHave('pockets', function ($sql) use ($pocket) {
+                            $sql->where('pocket_id', '=', $pocket->id);
+                        })
+                        ->inRandomOrder()
+                        ->first();
+
+                    if ($user) {
+                        $pocket
+                            ->users()
+                            ->save($user, ['is_owner' => 1]);
+                    }
                 });
 
             $pockets->take(floor($pockets->count() / 2))
-                ->get()
                 ->each(function (\Pocket $pocket) {
-                    $pocket->save(\User::inRandomOrder()->first(), ['is_owner', 0]);
+
+                    /** @var \User $user */
+                    $user = \User::whereDoesntHave('pockets', function ($sql) use ($pocket) {
+                            $sql->where('pocket_id', '=', $pocket->id);
+                        })
+                        ->inRandomOrder()
+                        ->first();
+
+                    if ($user) {
+                        $pocket
+                            ->users()
+                            ->save($user, ['is_owner' => 0]);
+                    }
                 });
         }
     }

@@ -29,7 +29,7 @@ class CreateAccountsTable extends Migration
             // User
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')
-                ->references('user_id')
+                ->references('id')
                 ->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
@@ -37,7 +37,7 @@ class CreateAccountsTable extends Migration
             // Account
             $table->unsignedInteger('account_id');
             $table->foreign('account_id')
-                ->references('account_id')
+                ->references('id')
                 ->on('accounts')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
@@ -56,7 +56,7 @@ class CreateAccountsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('accounts');
         Schema::dropIfExists('account_user');
+        Schema::dropIfExists('accounts');
     }
 }
