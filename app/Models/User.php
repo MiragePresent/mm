@@ -14,6 +14,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $login
  * @property string $password
  *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Account[] $accounts
+ *
  * @mixin  \Illuminate\Database\Eloquent\Model
  */
 class User extends Authenticatable
@@ -42,4 +44,12 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+
+    // RELATIONS
+
+    public function accounts()
+    {
+        return $this->belongsToMany(\Account::class)->withPivot('is_owner');
+    }
 }

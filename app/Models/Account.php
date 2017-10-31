@@ -11,10 +11,32 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $title
  * @property float $balance
  *
- * @package App\Models
+ * @property-read \App\Models\User $owner
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
+ *
+ * @mixin  \Illuminate\Database\Eloquent\Model
  */
 
 class Account extends Model
 {
-    //
+
+    protected $fillable = [
+        'title',
+        'balance'
+    ];
+
+
+    // RELATIONS
+    public function users()
+    {
+        return $this->belongsToMany(\User::class)->withPivot('is_owner');
+    }
+
+    /**
+     * @return \User $owner
+     */
+    public function owner()
+    {
+        return $this->users()->wherePivot('is_owner', 1)->first();
+    }
 }
