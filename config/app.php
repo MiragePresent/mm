@@ -227,7 +227,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         // Models aliases
-        'User'  =>  App\Models\User::class,
+        'User'          =>  App\Models\User::class,
+        'Account'       =>  App\Models\Account::class,
 
     ],
 
