@@ -57,5 +57,13 @@ class UsersSeeder extends Seeder
                 $user->save(factory(\Account::class)->create(), ['is_owner', 1]);
             });
 
+        // User pockets
+        \User::inRandomOrder()
+            ->take(floor(\User::count(), 2))
+            ->get()
+            ->each(function (\User $user) {
+                $user->save(factory(\Pocket::class)->create(), ['is_owner' => 1]);
+            });
+
     }
 }

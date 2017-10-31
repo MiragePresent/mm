@@ -15,6 +15,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $password
  *
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Account[] $accounts
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Pocket[] $pocket
  *
  * @mixin  \Illuminate\Database\Eloquent\Model
  */
@@ -51,5 +52,9 @@ class User extends Authenticatable
     public function accounts()
     {
         return $this->belongsToMany(\Account::class)->withPivot('is_owner');
+    }
+    public function pockets()
+    {
+        return $this->belongsToMany(\Pocket::class)->withPivot('is_owner');
     }
 }

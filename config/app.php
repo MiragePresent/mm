@@ -229,6 +229,7 @@ return [
         // Models aliases
         'User'          =>  App\Models\User::class,
         'Account'       =>  App\Models\Account::class,
+        'Pocket'        =>  App\Models\Pocket::class,
 
     ],
 
