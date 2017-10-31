@@ -53,8 +53,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(\Account::class)->withPivot('is_owner');
     }
+
     public function pockets()
     {
         return $this->belongsToMany(\Pocket::class)->withPivot('is_owner');
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(\Transaction::class);
     }
 }
