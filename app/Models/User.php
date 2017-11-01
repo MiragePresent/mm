@@ -17,6 +17,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  *
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Account[] $accounts
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Pocket[] $pockets
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Transaction[] $transactions
  *
  * @mixin  \Illuminate\Database\Eloquent\Model
  */
