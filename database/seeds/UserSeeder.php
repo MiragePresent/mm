@@ -55,7 +55,7 @@ class UserSeeder extends Seeder
             ->each(function (\User $user) {
                 $user
                     ->accounts()
-                    ->save(factory(\Account::class)->cregate(), ['is_owner' => 1]);
+                    ->save(factory(\Account::class)->create(), ['is_owner' => 1]);
 
                 \Category::common()
                     ->get()

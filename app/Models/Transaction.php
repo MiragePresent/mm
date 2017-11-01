@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class Transaction
@@ -38,6 +39,12 @@ class Transaction extends Model
         'comment'
     ];
 
+    // SCOPES
+
+    public function scopePaidByAccount(Builder $query)
+    {
+        return $query->where('wallet_type', \Account::MORPH_NAME);
+    }
 
     // RELATIONS
 

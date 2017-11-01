@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 /**
  *  Model User
  *
+ * @property int $id
  * @property string $first_name
  * @property string $last_name
  * @property string $email
@@ -15,7 +16,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $password
  *
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Account[] $accounts
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Pocket[] $pocket
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Pocket[] $pockets
  *
  * @mixin  \Illuminate\Database\Eloquent\Model
  */
@@ -62,6 +63,17 @@ class User extends Authenticatable
     public function transactions()
     {
         return $this->hasMany(\Transaction::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function paidByAccount()
+    {
+        return $this
+            ->hasMany(\Transaction::class)
+            ->where('wallet_type', \Account::MORPH_NAME)
+            ->where('amount', '<', 0);
     }
 
     public function categories()

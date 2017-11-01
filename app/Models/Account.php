@@ -20,6 +20,8 @@ use Illuminate\Database\Eloquent\Model;
 class Account extends Model
 {
 
+    const MORPH_NAME = 'account';
+
     protected $fillable = [
         'title',
         'balance'
