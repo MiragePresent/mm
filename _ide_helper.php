@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.5.19 on 2017-10-31.
+ * Generated for Laravel 5.5.19 on 2017-11-01.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -14200,6 +14200,8 @@ namespace  {
     class Pocket extends \App\Models\Pocket {}
 
     class Transaction extends \App\Models\Transaction {}
+
+    class Category extends \App\Models\Category {}
  
 }
 
