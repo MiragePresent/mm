@@ -227,7 +227,11 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         // Models aliases
-        'User'  =>  App\Models\User::class,
+        'User'          =>  App\Models\User::class,
+        'Account'       =>  App\Models\Account::class,
+        'Pocket'        =>  App\Models\Pocket::class,
+        'Transaction'   =>  App\Models\Transaction::class,
+        'Category'      =>  App\Models\Category::class,
 
     ],
 

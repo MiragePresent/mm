@@ -8,11 +8,16 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 /**
  *  Model User
  *
+ * @property int $id
  * @property string $first_name
  * @property string $last_name
  * @property string $email
  * @property string $login
  * @property string $password
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Account[] $accounts
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Pocket[] $pockets
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Transaction[] $transactions
  *
  * @mixin  \Illuminate\Database\Eloquent\Model
  */
@@ -42,4 +47,38 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+
+    // RELATIONS
+
+    public function accounts()
+    {
+        return $this->belongsToMany(\Account::class)->withPivot('is_owner');
+    }
+
+    public function pockets()
+    {
+        return $this->belongsToMany(\Pocket::class)->withPivot('is_owner');
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(\Transaction::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function paidByAccount()
+    {
+        return $this
+            ->hasMany(\Transaction::class)
+            ->where('wallet_type', \Account::MORPH_NAME)
+            ->where('amount', '<', 0);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(\Category::class);
+    }
 }

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class UsersSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /** @var int $count Number of users which will be generated */
     protected $count = 20;
@@ -48,8 +48,32 @@ class UsersSeeder extends Seeder
             factory(\User::class)->create();
         }
 
-        $this->command->line('');
         $this->command->info($this->count . ' test users were created.');
+
+        // Users common
+        \User::all()
+            ->each(function (\User $user) {
+                $user
+                    ->accounts()
+                    ->save(factory(\Account::class)->create(), ['is_owner' => 1]);
+
+                \Category::common()
+                    ->get()
+                    ->each(function (\Category $category) use ($user) {
+                        $user->categories()->save($category);
+                    });
+
+            });
+
+        // User pockets
+        \User::inRandomOrder()
+            ->take(floor(\User::count() / 2))
+            ->get()
+            ->each(function (\User $user) {
+                $user
+                    ->pockets()
+                    ->save(factory(\Pocket::class)->create(), ['is_owner' => 1]);
+            });
 
     }
 }
