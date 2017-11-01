@@ -15,14 +15,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Transaction[] $transactions
  * @property-read \Illuminate\Database\Eloquent\Collection||\App\Models\User[] $users
  *
- * @method \Illuminate\Database\Eloquent\Builder common() Common categories for all ussers
+ * @method \Illuminate\Database\Eloquent\Builder common() Common categories for all users
  *
  * @package App
  */
 
 class Category extends Model
 {
-    
+
     protected $fillable = [
         'title',
         'thumb',
