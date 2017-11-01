@@ -24,6 +24,14 @@ class CreateTransactionsTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
+            // Category
+            $table->unsignedInteger('category_id')->nullable();
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('categories')
+                ->onDelete('set null')
+                ->onUpdate('cascade');
+
             // Transaction
             $table->unsignedBigInteger('parent_id')
                 ->index()
