@@ -13,19 +13,29 @@ use Illuminate\Database\Eloquent\Model;
  * @property boolean $is_common
  *
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Transaction[] $transactions
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
+ * @property-read \Illuminate\Database\Eloquent\Collection||\App\Models\User[] $users
+ *
+ * @method \Illuminate\Database\Eloquent\Builder common() Common categories for all ussers
  *
  * @package App
  */
 
 class Category extends Model
 {
-
+    
     protected $fillable = [
         'title',
         'thumb',
         'is_common'
     ];
+
+
+    // SCOPES
+
+    public function scopeCommon($query)
+    {
+        return $query->whereIsCommon(1);
+    }
 
 
     // RELATIONS
